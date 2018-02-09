@@ -1,0 +1,29 @@
+<div id="logs">
+  <h3>Execution Logs</h3>
+  <hr>
+  <div id="logs-table">
+    <table class="aui">
+      <thead>
+      <tr>
+        <th>Summary</th>
+        <th>Description</th>
+        <th>User ID</th>
+        <th>Link ID</th>
+        <th>Created</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let log of logs | paginate: { itemsPerPage: 15, currentPage: page } ">
+        <td>{{ log.summary }}</td>
+        <td>{{ log.description }}</td>
+        <td>{{ log.userId }}</td>
+        <td>{{ log.linkId }}</td>
+        <td>{{ log.createdAt | dateCet }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="pagination" [hidden]="logs.length <= 15">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

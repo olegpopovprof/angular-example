@@ -1,0 +1,25 @@
+<section id="aui-dialog" class="aui-dialog2 aui-dialog2-small aui-layer" role="dialog" aria-hidden="true">
+  <header class="aui-dialog2-header">
+    <h2 class="aui-dialog2-header-main" *ngIf="type === 'confirm'">
+      <span class="aui-icon aui-icon-medium aui-iconfont-warning"></span> Attention!
+    </h2>
+    <h2 class="aui-dialog2-header-main" *ngIf="type === 'message'">
+      <span class="aui-icon aui-icon-medium aui-iconfont-info"></span> Info
+    </h2>
+    <button class="aui-dialog-close-button" (click)="close(false)">
+      <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+    </button>
+  </header>
+  <div class="aui-dialog2-content">
+    {{ message }}
+  </div>
+  <footer class="aui-dialog2-footer">
+    <div class="aui-dialog2-footer-actions" *ngIf="type === 'confirm'">
+      <button id="confirm-button" class="aui-button aui-button-primary" (click)="close(true)">Yes</button>
+      <button id="decline-button" class="aui-button aui-button-default" (click)="close(false)">No</button>
+    </div>
+    <div class="aui-dialog2-footer-actions" *ngIf="type === 'message'">
+      <button id="done-button" class="aui-button aui-button-default" (click)="close(true)">OK</button>
+    </div>
+  </footer>
+</section>

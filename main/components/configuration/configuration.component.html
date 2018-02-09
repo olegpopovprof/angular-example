@@ -1,0 +1,41 @@
+<div id="configuration">
+    <div class="text-left" id="security-section" *ngIf="jiraGroups && permissions">
+        <h3>Add on Security</h3>
+        <hr />
+        <div id="permission-form">
+            <form class="aui" #permissionForm="ngForm" (submit)="addPermission(permissionForm, permissionSelect)">
+                <div class="field-group">
+                    <label for="permission">Permission: </label>
+                    <select class="select" name="permission" id="permission" #permissionSelect>
+                        <option *ngFor="let group of jiraGroups" [value]="group.name">{{ group.name }}</option>
+                    </select>
+                    <button class="aui-button aui-button-primary">Add</button>
+                </div>
+            </form>
+        </div>
+        <div id="permissions-table">
+            <table class="aui">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let permission of permissions | paginate: { itemsPerPage: 5, currentPage: page } ">
+                        <td>{{ permission.name }}</td>
+                        <td>
+                            <button type="button" class="aui-button" (click)="deletePermission(permission)"
+                                    *ngIf="(permission.name !== 'administrators' && permission.name !== 'site-admins')">
+                                <span class="aui-icon aui-icon-small aui-iconfont-delete"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination" [hidden]="permissions.length <= 5">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
